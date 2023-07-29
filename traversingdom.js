@@ -55,7 +55,7 @@ console.log(itemList.previousSibling);
 console.log(itemList.previousElementSibling);
 
 itemList.previousElementSibling.style.backgroundColor='yellow';
-
+jmnhuyjh
 //create element
 
 var newEle=document.createElement('div');
