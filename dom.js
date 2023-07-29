@@ -23,7 +23,7 @@ console.log(document.images)*/
 //header.style.borderBottom='dotted 3px #000';
 
 
-//GET ELEMENT BY CLASSE name
+//GET ELEMENT BY CLASS name
 
 /*var item=document.getElementsByClassName('list-group-item');
 console.log(item);
@@ -36,7 +36,6 @@ item[2].style.backgroundColor='green';
 for(var i=0;i<item.length;i++)
 {
     item[i].style.fontWeight='bold';
-}*/
 
 /*var li=document.getElementsByTagName('li');
 console.log(li);
