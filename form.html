@@ -79,13 +79,20 @@ function showonscreen(obj)
 
   //  parentele.innerHTML=parentele.innerHTML+`<li>${obj.username}- ${obj.useremail}- ${obj.userno}-<button type=delete>delete</button></li>`;
     const listItem = document.createElement('li');
-    listItem.innerHTML = `${obj.username} - ${obj.useremail} - ${obj.userno} - <button class="delete-btn">delete</button>`;
+    listItem.innerHTML = `${obj.username} - ${obj.useremail} - ${obj.userno} - <button class="delete-btn">delete</button><button class="edit-btn">edit</button>`;
     parentele.appendChild(listItem);
 
     const deleteButton = listItem.querySelector('.delete-btn');
     deleteButton.addEventListener('click', () => {
         localStorage.removeItem(obj.useremail);
         listItem.remove();
+
+        
+        });
+        const editbutton=listItem.querySelector('.edit-btn');
+        editbutton.addEventListener('click',()=>{
+            localStorage.removeItem(obj.useremail);
+            listItem.remove();
     });
 }
 
