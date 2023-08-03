@@ -1,36 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <!DOCTYPE html>
     <html>
+
     <head>
         <title>Local Storage Example</title>
     </head>
+       <style>
+        h2{
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        form{
+              background-color: antiquewhite;
+              text-align: center;
+              border:solid 2px black;
+              height:200px;
+            }
+            form input
+            {
+                width:800px;
+                height:20px;
+            }
+            label{
+                font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                
+            }
+            
+       </style>
     <body>
         <h2>Store User Info in Local Storage</h2>
-        <form id="user-form">
-            <label for="name">Name:</label>
-            <input type="text" id="name" required><br>
-            
-            <label for="email">Email:</label>
-            <input type="email" id="email" required><br>
-            
-            <label for="number">Phone Number:</label>
-            <input type="tel" id="number" required><br>
-            
-            <button type="submit">Submit</button>
-            
+        <form onsubmit="onlocalstorage(event)">
+            <br>
+            <label for="name">Name:</label><br>
+            <input type="text" name="name" required><br>
+
+            <label for="email">Email:</label><br>
+            <input type="email" name="email" required><br>
+
+            <label for="number">Phone Number:</label><br>
+            <input type="tel" name="number" required><br><br>
+
+            <button type="submit">Submit</button><br><br>
+
         </form>
         <ul id="listofitem">
-                
+        
+         
         </ul>
-    
-        <script src="storedata.js"> </script>
+
+        <script src="deletedatalstorage.js"></script>
     </body>
+
     </html>
-    
