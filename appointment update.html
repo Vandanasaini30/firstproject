@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+        <title>Local Storage Example</title>
+    </head>
+    <style>
+        h2 {
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        form {
+            background-color: antiquewhite;
+            text-align: center;
+            border: solid 2px black;
+            height: 200px;
+        }
+
+        form input {
+            width: 800px;
+            height: 20px;
+        }
+
+        label {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+        }
+    </style>
+
+    <body>
+        <h2>Store User Info in Local Storage</h2>
+        <form onsubmit="onlocalstorage(event)">
+            <br>
+            <label for="name">Name:</label><br>
+            <input type="text" id="username" name="name" required><br>
+
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" required><br>
+
+            <label for="number">Phone Number:</label><br>
+            <input type="tel" id="phonenumber" name="number" required><br><br>
+
+            <button type="submit">Submit</button><br><br>
+
+        </form>
+        <ul id="listofitem">
+
+
+        </ul>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js "></script>
+        <script>
+            function onlocalstorage(event) {
+                event.preventDefault();
+                const username = event.target.name.value;
+                const useremail = event.target.email.value;
+                const userno = event.target.number.value;
+
+                const obj = {
+                    username,
+                    useremail,
+                    userno,
+                }
+                axios.post("https://crudcrud.com/api/70bcb858d07c45f49a63557b56deb6fd/app", obj)
+                    .then((response) => {
+                        // Update the user details in the displayed list
+                        showonscreen(response.data);
+
+                        // Clear and reset the form after submitting
+                        event.target.reset();
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+                // localStorage.setItem(obj.useremail,JSON.stringify(obj))
+                // showonscreen(obj)
+            }
+            window.addEventListener("DOMContentLoaded", () => {
+                const data = axios.get("https://crudcrud.com/api/70bcb858d07c45f49a63557b56deb6fd/app")
+                    .then((response) => {
+                        console.log(response)
+                        for (var i = 0; i < response.data.length; i++) {
+                            showonscreen(response.data[i])
+                        }
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                    })
+
+            })
+            function showonscreen(user) {
+                document.getElementById('username').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('phonenumber').value = '';
+                if (localStorage.getItem(user.useremail) !== null) {
+                    const parentNode = document.getElementById('listofitem');
+                    const childHTML = `<li id=${user.id}> ${user.username}- ${user.email}
+                        <button onclick=deleteUser('${user._id}')>Delete User</button>
+                        <button onclick=editUserDetails('${user._id}',${user.email}','${user.username}','${user.phonenumber})
+                        </li>`
+                    parentNode.innerHTML = parentNode.innerHTML + childHTML;
+                }
+            }
+            //edit user
+            function editUserDetails(userId,emailId,name,phonenumber){
+                document.getElementById('email').value=emailId;
+                document.getElementById('username').value=name;
+                document.getElementById('phonenumber').value=phonenumber;
+                
+                deleteUser(userId)
+            }
+
+            //deleteuser
+            function deleteUser(userId){
+                axios.delete("https://crudcrud.com/api/70bcb858d07c45f49a63557b56deb6fd/app")
+                .then((response)=>{
+                    removeUserFromScreen(userId)
+                })
+                .catch((err)=>{
+                    console.log(err)
+
+                })
+            }
+
+
+            function removeUserFromScreen(userId) {
+            const userElement = document.getElementById(userId);
+            if (userElement) {
+                userElement.remove();
+            }
+        }
+
+        </script>
+    </body>
+
+    </html>
